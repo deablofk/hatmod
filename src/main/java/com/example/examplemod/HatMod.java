@@ -74,7 +74,7 @@ public class HatMod {
     Player player = event.player;
     ItemStack itemstack = player.getItemBySlot(EquipmentSlot.HEAD);
     if (itemstack.is(HAT_ITEM.get())) {
-      player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 200, 6, false, false, true));
+      player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 200, 10, false, false, true));
     }
   }
 
