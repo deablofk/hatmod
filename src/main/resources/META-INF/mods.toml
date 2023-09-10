@@ -1,0 +1,11 @@
+modLoader="javafml" #mandatory
+loaderVersion="1.20-1.20.1" #mandatory
+# license=""
+license="All Rights Reserved"
+
+[[mods]] #mandatory
+modId="hatmod" #mandatory
+version="1.20" #mandatory
+displayName="Hat Mod" #mandatory
+authors="[bolita, deablofk]" #optional
+description='''Mod de Chapeu'''

@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "hatmod:block/hat_block"
+    }
+  }
+}
