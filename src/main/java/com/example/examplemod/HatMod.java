@@ -2,6 +2,8 @@ package com.example.examplemod;
 
 import com.example.examplemod.blocks.HatBlock;
 import com.example.examplemod.blocks.HatItem;
+import com.example.examplemod.item.ModCreativeModTabs;
+import com.example.examplemod.item.ModItem;
 import com.mojang.logging.LogUtils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -14,6 +16,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.TickEvent.PlayerTickEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -34,6 +37,8 @@ public class HatMod {
       DeferredRegister.create(ForgeRegistries.BLOCKS, MODID);
   public static final DeferredRegister<Item> ITEMS =
       DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
+  public static final RegistryObject<Item> SAPPHIRE = ITEMS.register("sapphire",
+          () -> new Item (new Item.Properties()));
   public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS =
       DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
 
@@ -65,9 +70,19 @@ public class HatMod {
     ITEMS.register(modEventBus);
     CREATIVE_MODE_TABS.register(modEventBus);
     MinecraftForge.EVENT_BUS.register(this);
+    ModItem.register(modEventBus);
+    modEventBus.addListener(this::addCreative);
+    ModCreativeModTabs.register(modEventBus);
   }
 
   private void commonSetup(final FMLCommonSetupEvent event) {}
+
+  private void  addCreative(BuildCreativeModeTabContentsEvent event) {
+    if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
+      event.accept(ModItem.SAPPHIRE);
+      event.accept(ModItem.RAW_SAPPHIRE);
+    }
+  }
 
   @SubscribeEvent
   public void onPlayerTick(PlayerTickEvent event) {
